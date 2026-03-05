@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nas Tech Innovation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
+body{
+background:#0a0a0a;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+flex-direction:column;
+}
+
+.container{
+width:90%;
+max-width:900px;
+text-align:center;
+}
+
+h1{
+font-size:40px;
+margin-bottom:10px;
+}
+
+p{
+opacity:0.8;
+margin-bottom:40px;
+}
+
+.cards{
+display:flex;
+gap:30px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+.card{
+background:#111;
+border:1px solid #222;
+padding:40px;
+width:260px;
+border-radius:12px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+border-color:#4da6ff;
+}
+
+.step{
+display:none;
+}
+
+.active{
+display:block;
+}
+
+button{
+background:#4da6ff;
+border:none;
+padding:12px 25px;
+color:white;
+border-radius:6px;
+margin-top:20px;
+cursor:pointer;
+}
+
+.options button{
+margin:10px;
+}
+
+form input,form textarea{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:none;
+border-radius:6px;
+}
+
+.success{
+display:none;
+margin-top:20px;
+color:#4da6ff;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="home" class="active">
+
+<h1>Nas Tech Innovation</h1>
+<p>Advanced App & Website Development</p>
+
+<div class="cards">
+
+<div class="card" onclick="start('app')">
+<h2>📱 Build an App</h2>
+<p>Create powerful mobile applications</p>
+</div>
+
+<div class="card" onclick="start('web')">
+<h2>🌐 Build a Website</h2>
+<p>Modern websites & web platforms</p>
+</div>
+
+</div>
+
+</div>
+
+
+<div id="step1" class="step">
+
+<h2>Select Platform</h2>
+
+<div class="options">
+
+<button onclick="choose('Android')">Android</button>
+<button onclick="choose('iOS')">iOS</button>
+<button onclick="choose('Cross Platform')">Cross Platform</button>
+
+</div>
+
+</div>
+
+
+<div id="step2" class="step">
+
+<h2>Select Project Type</h2>
+
+<div class="options">
+
+<button onclick="chooseType('Business')">Business</button>
+<button onclick="chooseType('Ecommerce')">Ecommerce</button>
+<button onclick="chooseType('Education')">Education</button>
+<button onclick="chooseType('Custom')">Custom</button>
+
+</div>
+
+</div>
+
+
+<div id="step3" class="step">
+
+<h2>Project Request</h2>
+
+<form id="projectForm">
+
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Email" required>
+
+<textarea name="message" placeholder="Describe your project"></textarea>
+
+<button type="submit">Submit Project</button>
+
+</form>
+
+<div class="success" id="success">
+Project request sent successfully
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let projectType=""
+let platform=""
+
+function start(type){
+
+projectType=type
+
+document.getElementById("home").classList.remove("active")
+document.getElementById("step1").classList.add("active")
+
+}
+
+function choose(p){
+
+platform=p
+
+document.getElementById("step1").classList.remove("active")
+document.getElementById("step2").classList.add("active")
+
+}
+
+function chooseType(t){
+
+document.getElementById("step2").classList.remove("active")
+document.getElementById("step3").classList.add("active")
+
+}
+
+document.getElementById("projectForm").addEventListener("submit",function(e){
+
+e.preventDefault()
+
+const formData = new FormData(this)
+
+fetch("YOUR_GOOGLE_SCRIPT_URL",{
+method:"POST",
+body:formData
+})
+
+.then(res=>{
+
+document.getElementById("success").style.display="block"
+
+})
+
+})
+
+</script>
+
+</body>
+</html>
